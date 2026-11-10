@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Releases & Catalogue | AW Musik</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="https://c.saavncdn.com/labels/Aw_Musik_20230420112404_500x500.jpg">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .main-content {
+            text-align: center;
+            margin: 20px auto; 
+            padding: 0 20px;
+        }
+
+        .btn-group-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #007bff, #3399ff);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #0056b3, #1e90ff);
+            box-shadow: 0 6px 12px rgba(0, 123, 255, 0.4);
+        }
+
+        .btn.active {
+            background: linear-gradient(135deg, #003d80, #0056b3);
+            box-shadow: 0 6px 12px rgba(0, 86, 179, 0.6);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Logo sizing inside navbar */
+        .nav-logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .nav-logo {
+            height: 35px;
+            width: auto;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+
+<div class="music-container">
+    
+    <!-- Navigation Bar -->
+    <nav class="nav-bar">
+        <div class="nav-brand" style="display: flex; align-items: center; gap: 12px;">
+            <a href="index.html" class="nav-logo-link">
+                <img src="https://c.saavncdn.com/labels/Aw_Musik_20230420112404_500x500.jpg" alt="AW Musik Logo" class="nav-logo">
+            </a>
+            <span style="font-weight: 800; letter-spacing: 1px; font-size: 16px; color: #ffffff; text-transform: uppercase;">AW MUSIK</span>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Menu">☰</button>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="releases.html" class="active-link" style="border-color: #ffcc00; color: #ffcc00;">Releases</a>
+            <a href="labels.html">Distributed Labels</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </nav>
+    
+    <div class="main-content" style="padding-top: 30px;">
+        <h2 style="font-size: 24px; margin-bottom: 20px; text-shadow: 0 2px 5px rgba(0,0,0,0.3);">AW Musik Complete Discography</h2>
+        
+        <div class="btn-group-wrapper">
+            <div class="btn-group">
+                <button class="btn active" onclick="filterItems('album', event)">Albums (<span id="albumCount"></span>)</button>
+                <button class="btn" onclick="filterItems('single', event)">Singles (<span id="singleCount"></span>)</button>
+                <button class="btn" onclick="filterItems('client', event)">Client Content (<span id="clientCount"></span>)</button>
+            </div>
+            <div id="totalCount" style="font-size: 16px; color: #a8e4ff; font-weight: 600; margin-top: 5px;">
+                Total Releases: <span id="totalImageCount">0</span>
+            </div>
+        </div>
+        
+        <div class="gallery" id="galleryContainer">
+            <!-- Dynamic Grid Items -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer Placeholder -->
+    <div id="site-footer"></div>
+</div>
+
+<!-- Yeh line add karni hai releases.html me -->
+<script src="script.js"></script>
+
+<script>
+    const albums = [
+        "https://c.saavncdn.com/547/Fl-Studio-Album-Unknown-2018-20240607203713-500x500.jpg",
+        "https://c.saavncdn.com/799/Fl-Studio-Album-Vol-2-Unknown-2018-20250117015243-500x500.jpg", 
+        "https://c.saavncdn.com/696/Music-Maker-Jam-Unknown-2018-20220309042833-500x500.jpg", 
+        "https://c.saavncdn.com/448/FL-Studio-Album-3-Unknown-2018-20250108171150-500x500.jpg", 
+        "https://c.saavncdn.com/442/FLSA-Mashup-Unknown-2019-20220806041712-500x500.jpg", 
+        "https://c.saavncdn.com/925/Instrumental-Marathi-Hits-Unknown-2019-20220507092007-500x500.jpg", 
+        "https://c.saavncdn.com/223/Out-Of-The-Mind-Unknown-2019-20220309042830-500x500.jpg", 
+        "https://c.saavncdn.com/895/Madness-of-Music-Unknown-2019-20220427112852-500x500.jpg", 
+        "https://c.saavncdn.com/057/Motyachi-Maal-Unknown-2019-20240702110619-500x500.jpg", 
+        "https://c.saavncdn.com/610/Fl-Studio-Album-4-Unknown-2019-20240417201110-500x500.jpg", 
+        "https://c.saavncdn.com/714/FLSA-5-Original-Back-Again-Unknown-2019-20230505050412-500x500.jpg", 
+        "https://c.saavncdn.com/951/The-Noob-Gamer-Unknown-2020-20240807080724-500x500.jpg", 
+        "https://c.saavncdn.com/170/Out-of-the-Mind-2-Unknown-2021-20220309042836-500x500.jpg",
+        "https://c.saavncdn.com/518/Mobile-Wale-Musicians-Unknown-2021-20240607203734-500x500.jpg", 
+        "https://c.saavncdn.com/286/EDM-Wale-Musicians-Dhol-Mix--Unknown-2021-20220309042624-500x500.jpg", 
+        "https://c.saavncdn.com/560/Madness-of-Southern-Music-Unknown-2021-20230802215050-500x500.jpg", 
+        "https://c.saavncdn.com/778/Mobile-Wale-Musicians-2-Unknown-2021-20240607203406-500x500.jpg", 
+        "https://c.saavncdn.com/651/EDM-Wale-Musicians-2-feat-Karan-Art-DMT--Unknown-2021-20220309042742-500x500.jpg", 
+        "https://c.saavncdn.com/324/The-Noob-Gamer-2-Unknown-2021-20220623161747-500x500.jpg", 
+        "https://c.saavncdn.com/338/Out-Of-The-Mind-3-Unknown-2022-20220309043206-500x500.jpg", 
+        "https://c.saavncdn.com/546/Madness-Of-Music-2-Unknown-2022-20240607203339-500x500.jpg", 
+        "https://c.saavncdn.com/138/Mobile-Wale-Musicians-3-Unknown-2022-20240607203317-500x500.jpg", 
+        "https://c.saavncdn.com/572/Unstoppable-Unknown-2022-20240607203216-500x500.jpg", 
+        "https://c.saavncdn.com/370/Mobile-Wale-Musicians-4-Unknown-2022-20240607203156-500x500.jpg", 
+        "https://c.saavncdn.com/890/Motyachi-Maal-2-Ganapati-Special-Unknown-2022-20220827023713-500x500.jpg", 
+        "https://c.saavncdn.com/861/Out-Of-The-Mind-4-Unknown-2023-20240607212241-500x500.jpg", 
+        "https://c.saavncdn.com/174/Wisdom-Unknown-2023-20250117015243-500x500.jpg", 
+        "https://c.saavncdn.com/962/Madness-of-southern-Music-2-Unknown-2023-20230926231140-500x500.jpg", 
+        "https://c.saavncdn.com/939/Mystic-Shores-Unknown-2024-20240729231437-500x500.jpg", 
+        "https://c.saavncdn.com/102/Mobile-Wale-Musicians-5-Unknown-2024-20240905001226-500x500.jpg"
+    ];
+    const singles = [
+        "https://i.scdn.co/image/ab67616d0000b2739b9b5b922c25556ae4a34f91",
+        "https://source.boomplaymusic.com/group10/M00/08/03/1ed09bd8212e40d88f6e4c8983f6e4c2_464_464.png",
+        "https://c.saavncdn.com/816/Dil-Ne-feat-Anup-Wasave-Instrumental--Unknown-2018-20220309042506-500x500.jpg",
+        "https://c.saavncdn.com/842/DJ-Dangerous-Jaanbaaz-BGM-Unknown-2020-20231017234856-500x500.jpg",
+        "https://c.saavncdn.com/903/TSK-3-BGM-Madness-Of-Love-Unknown-2021-20240807080909-500x500.jpg",
+        "https://c.saavncdn.com/501/Mla-Bgm-Unknown-2021-20240702110630-500x500.jpg",
+        "https://c.saavncdn.com/590/Yes-You-Are-Unknown-2021-20220309042527-500x500.jpg",
+        "https://c.saavncdn.com/884/Happy-Birthday-Shailya-English-2021-20250117015243-500x500.jpg",
+        "https://c.saavncdn.com/283/The-Outro-Extended-From-The-Noob-Gamer-2-Unknown-2021-20220623161747-500x500.jpg",
+        "https://c.saavncdn.com/748/Southern-Guitar-Rhythm-Unknown-2021-20240607203339-500x500.jpg",
+        "https://c.saavncdn.com/538/Mother-s-Cheer-Hindi-2021-20220609111822-500x500.jpg",
+        "https://c.saavncdn.com/068/The-Sky-Unknown-2022-20250117015243-500x500.jpg",
+        "https://c.saavncdn.com/879/The-Southern-Vibe-Unknown-2022-20220325053649-500x500.jpg",
+        "https://c.saavncdn.com/314/The-Southern-Vibe-2-0-feat-iGoravSharma-feat-iGoravSharma--English-2022-20220325053749-500x500.jpg",
+        "https://c.saavncdn.com/255/Melody-Of-Memories-Unknown-2022-20250117015243-500x500.jpg",
+        "https://c.saavncdn.com/114/The-MMJ-Things-Unknown-2022-20220425154737-500x500.jpg",
+        "https://c.saavncdn.com/352/History-II-Amharic-2022-20250117015243-500x500.jpg",
+        "https://c.saavncdn.com/091/Halloween-Party-Unknown-2022-20220816134216-500x500.jpg",
+        "https://c.saavncdn.com/499/Classical-Mess-Up-Unknown-2022-20250117015243-500x500.jpg",
+        "https://c.saavncdn.com/601/Life-Goes-Up-and-Down-Unknown-2022-20240607212305-500x500.jpg",
+        "https://c.saavncdn.com/828/Anywhere-English-2023-20250117015243-500x500.jpg",
+        "https://c.saavncdn.com/002/Energetic-Embrace-Unknown-2023-20240607222931-500x500.jpg",
+        "https://c.saavncdn.com/756/The-Milestone-Unknown-2023-20240607222931-500x500.jpg",
+        "https://c.saavncdn.com/672/I-Love-You-Baby-Gujarati-2023-20230429183059-500x500.jpg",
+        "https://c.saavncdn.com/086/Infinity-Unknown-2023-20250117015243-500x500.jpg",
+        "https://c.saavncdn.com/824/Gangs-Amharic-2023-20250117015252-500x500.jpg",
+        "https://c.saavncdn.com/862/Morning-Amharic-2023-20250117015258-500x500.jpg",
+        "https://c.saavncdn.com/886/Lovely-Amharic-2023-20250117015243-500x500.jpg",
+        "https://c.saavncdn.com/603/Energetic-Embrace-2-Unknown-2023-20230913173431-500x500.jpg",
+        "https://c.saavncdn.com/578/Life-2-Never-Give-Up-Unknown-2024-20240408181957-500x500.jpg",
+        "https://c.saavncdn.com/250/Energetic-Embrace-3-Unknown-2025-20250506213758-500x500.jpg",
+	"https://c.saavncdn.com/445/Pehli-Pehli-Baar-Hindi-2025-20251012183819-500x500.jpg",
+	"https://c.saavncdn.com/364/Pahilyandach-Marathi-2026-20260301171753-500x500.jpg",
+	"https://c.saavncdn.com/674/Life-3-Rise-Again-Unknown-2026-20260417135222-500x500.jpg"
+    ];
+    const clients = [
+        // --- 2020 Releases ---
+        "https://c.saavncdn.com/897/Surta-A-Melody-Of-Love-CG-Song-Hindi-2020-20230825163336-500x500.jpg", // 05-Jun-20
+
+        // --- 2021 Releases ---
+        "https://c.saavncdn.com/512/Ae-Sangi-Vo-A-Melody-Of-Love-CG-Song-Unknown-2020-20230811091124-500x500.jpg", // 13-Feb-21
+        "https://c.saavncdn.com/191/Iccher-Sathe-Bengali-2021-20241217231608-500x500.jpg", // 01-Jan-21
+        "https://c.saavncdn.com/453/Mere-Jaisa-Psycho-Hindi-2021-20231003023026-500x500.jpg", // 23-Mar-21
+        "https://c.saavncdn.com/373/A-Snow-Night-Unknown-2021-20230826160824-500x500.jpg", // 12-Apr-21
+        "https://c.saavncdn.com/675/Morichika-Bengali-2021-20241217231547-500x500.jpg", // 25-Apr-21
+        "https://c.saavncdn.com/804/Out-Beat-Cast-Unknown-2021-20230826160822-500x500.jpg", // 30-Apr-21
+        "https://c.saavncdn.com/807/Success-Music-Out-Unknown-2021-20230826160759-500x500.jpg", // 13-May-21
+        "https://c.saavncdn.com/905/Onno-Abaran-Bengali-2021-20241217231603-500x500.jpg", // 14-Jun-21
+        "https://c.saavncdn.com/013/FL-Ag-Mood-Unknown-2021-20230826160812-500x500.jpg", // 21-Jun-21
+        "https://c.saavncdn.com/068/Jaag-Jaag-Jaag-Hindi-2021-20240326200919-500x500.jpg", // 05-Jul-21
+        // (Naina Mila Le missing link fallback / standard sequence)
+        "https://c.saavncdn.com/490/Beautiful-York-Unknown-2021-20211221054733-500x500.jpg", // 05-Sep-21
+        "https://c.saavncdn.com/328/Sun-Sun-Mor-Maya-Hindi-2021-20220425154737-500x500.jpg", // 30-Sep-21
+        "https://c.saavncdn.com/287/Tor-Sang-Ma-Rani-Unknown-2021-20211123123741-500x500.jpg", // 25-Oct-21
+        // Chhattisgarhiya Naam Mor (28-Oct-21)
+        "https://c.saavncdn.com/431/Jaane-Meriye-Sohnea-Hindi-2021-20240131075051-500x500.jpg", // 02-Nov-21
+        "https://c.saavncdn.com/918/Sachaai-Shayari-Bengali-2021-20241218190849-500x500.jpg", // 12-Dec-21
+        "https://c.saavncdn.com/971/Bhanga-Ayna-Bengali-2021-20241217180933-500x500.jpg", // 23-Dec-21
+        "https://c.saavncdn.com/850/Pop-Now-Unknown-2021-20230826160755-500x500.jpg", // 25-Dec-21
+
+        // --- 2022 Releases ---
+        "https://c.saavncdn.com/398/Rupdebi-Short-Version-Bengali-2022-20241218191523-500x500.jpg", // 12-Jan-22
+        "https://c.saavncdn.com/973/Bewafa-Vo-Chhattisgarhi-2022-20220120170618-500x500.jpg", // 20-Jan-22
+        "https://c.saavncdn.com/750/Maya-Rakhe-Rahibe-Vo-Hindi-2022-20240426201445-500x500.jpg", // 25-Jan-22
+        "https://c.saavncdn.com/445/Naam-Diyechi-Kalpana-Bengali-2022-20220129041546-500x500.jpg", // 30-Jan-22
+        "https://c.saavncdn.com/416/Man-Pa-To-To-Pa-Ke-Arabic-2022-20220216115814-500x500.jpg", // 04-Feb-22
+        "https://c.saavncdn.com/380/Aaa-Rani-Mor-Hindi-2022-20220623161747-500x500.jpg", // 13-Feb-22
+        "https://c.saavncdn.com/400/Bappu-Punjabi-2022-20240426192204-500x500.jpg", // 15-Feb-22
+        "https://c.saavncdn.com/988/Begana-Putt-Punjabi-2022-20240426192159-500x500.jpg", // 18-Feb-22
+        "https://c.saavncdn.com/149/Na-Dharti-Ma-He-Kono-Hindi-2022-20240327001331-500x500.jpg", // 06-Mar-22
+        "https://c.saavncdn.com/035/Thoda-Juluf-La-Hata-Hindi-2022-20240327172539-500x500.jpg", // 07-Apr-22
+        "https://c.saavncdn.com/641/Han-Tu-Chali-Punjabi-2022-20240327172600-500x500.jpg", // 11-May-22
+        "https://c.saavncdn.com/922/Gangster-Yaar-Punjabi-2022-20240429183013-500x500.jpg", // 19-Jun-22
+        "https://c.saavncdn.com/101/Pahaadi-Punjabi-2022-20240429183009-500x500.jpg", // 15-Jul-22
+        "https://c.saavncdn.com/586/Tor-Maya-Gajab-Lage-Chhattisgarhi-2022-20220724154119-500x500.jpg", // 23-Jul-22
+        "https://c.saavncdn.com/918/Baharuni-Ala-Asmant-Sara-Marathi-2022-20250718080225-500x500.jpg", // 27-Jul-22
+        "https://c.saavncdn.com/003/Tera-Nakhra-Punjabi-2022-20240429182948-500x500.jpg", // 30-Jul-22
+        "https://c.saavncdn.com/515/Morya-Morya-Marathi-2022-20250718080224-500x500.jpg", // 06-Aug-22
+        "https://c.saavncdn.com/959/Tujhe-Rahil-Naam-Othawar-Marathi-2022-20250718080224-500x500.jpg", // 28-Aug-22
+        "https://c.saavncdn.com/964/Vighnaharta-Tu-Bappa-Ganaraya-Marathi-2022-20250718080224-500x500.jpg", // 29-Aug-22
+        "https://c.saavncdn.com/908/Pahile-Vandan-Majhe-Tujla-Gaurinandana-Marathi-2022-20250718080224-500x500.jpg", // 30-Aug-22
+        "https://c.saavncdn.com/438/Ganapati-Majha-Saryancha-Raja-Marathi-2022-20250718080225-500x500.jpg", // 08-Sep-22
+        "https://c.saavncdn.com/888/Nuwa-Aashiq-Chhattisgarhi-2022-20220909190622-500x500.jpg", // 10-Sep-22
+        "https://c.saavncdn.com/757/Dena-Tu-Dena-Gavlan-English-2022-20250718080225-500x500.jpg", // 19-Sep-22
+        "https://c.saavncdn.com/860/Sanu-Ek-Pal-X-Duriyaan-Unknown-2022-20221020022245-500x500.jpg", // 16-Oct-22
+        "https://c.saavncdn.com/860/Time-Punjabi-2022-20240405201502-500x500.jpg", // 25-Oct-22
+        "https://c.saavncdn.com/274/Deri-Aankhi-Farake-Chhattisgarhi-2022-20221126190005-500x500.jpg", // 25-Nov-22
+        "https://c.saavncdn.com/318/Aashiqui-Aa-Gayi-Unknown-2022-20221128094501-500x500.jpg", // 01-Dec-22
+        "https://c.saavncdn.com/439/Shav-Babanche-Chandan-Chitevar-Marathi-2022-20250718124737-500x500.jpg", // 04-Dec-22
+        "https://c.saavncdn.com/953/Ishq-Ya-Mazak-Bengali-2022-20241217231608-500x500.jpg", // 15-Dec-22
+
+        // --- 2023 Releases ---
+        "https://c.saavncdn.com/873/CG-Love-Mashup-Hindi-2023-20230131135208-500x500.jpg", // 22-Jan-23
+        "https://c.saavncdn.com/593/Jiye-Ke-Aas-Bange-Chhattisgarhi-2022-20230217145028-500x500.jpg", // 17-Feb-23
+        "https://c.saavncdn.com/399/Ye-De-Jhulat-He-Re-Hindi-2023-20240429201227-500x500.jpg", // 20-Feb-23
+        "https://c.saavncdn.com/405/Fayra-Brand-Hain-Majanua-Bhojpuri-2023-20240429201214-500x500.jpg", // 28-Feb-23
+        "https://c.saavncdn.com/436/Nokh-Pichkari-Bhojpuri-2023-20230304154515-500x500.jpg", // 02-Mar-23
+        // Mere Ram (30-Mar-23)
+        "https://c.saavncdn.com/074/Kothay-Tumi-Bengali-2023-20241217231601-500x500.jpg", // 27-Mar-23
+        "https://c.saavncdn.com/267/Tomake-Bhule-Achi-Bengali-2023-20241218191525-500x500.jpg", // 30-Jan-23
+        "https://c.saavncdn.com/504/You-Know-My-Life-Punjabi-2023-20240430201025-500x500.jpg", // 25-May-23
+        "https://c.saavncdn.com/038/Majbi-Da-Putt-Punjabi-2023-20240430201010-500x500.jpg", // 04-Jun-23
+        "https://c.saavncdn.com/552/Vahalkar-Bhavkine-Gaav-Malak-Pujila-Marathi-2023-20250718124737-500x500.jpg", // 11-May-23
+        "https://c.saavncdn.com/849/Mi-Gavlyachi-Lek-Kunjavanat-Bhet-Gavlan-Marathi-2023-20250718125235-500x500.jpg", // 26-Jun-23
+        "https://c.saavncdn.com/201/Jaage-Jaage-Raat-Chhattisgarhi-2023-20230717132005-500x500.jpg", // 23-Jul-23
+        "https://c.saavncdn.com/549/Tujhya-Muralicha-Aikun-Dhvani-Marathi-2023-20250718124737-500x500.jpg", // 04-Aug-23
+        "https://c.saavncdn.com/068/Nasha-Punjabi-2023-20240430201017-500x500.jpg", // 09-Sep-23
+        "https://c.saavncdn.com/107/Majha-Ganapati-Aala-Marathi-2023-20250718124737-500x500.jpg", // 10-Sep-23
+        "https://c.saavncdn.com/448/Apan-Bana-Ke-Hindi-2023-20231005171111-500x500.jpg", // 17-Sep-23
+        "https://c.saavncdn.com/702/Waat-Pahato-Tujhi-Ganaraya-Marathi-2023-20250718125234-500x500.jpg", // 18-Sep-23
+        "https://c.saavncdn.com/386/Sarya-Jagala-Sukh-Wattoy-Ganraya-Marathi-2023-20250718125234-500x500.jpg", // 18-Sep-23
+        "https://c.saavncdn.com/610/Bappa-Aalay-Gharala-Dole-Bharuni-Pahu-Marathi-2023-20250718125235-500x500.jpg", // 19-Sep-23
+        "https://c.saavncdn.com/383/Teere-Teer-Rani-Mor-Hindi-2023-20231104013943-500x500.jpg", // 26-Oct-23
+
+        // --- 2024 Releases ---
+        "https://c.saavncdn.com/504/December-Bengali-2024-20240130190704-500x500.jpg", // 25-Jan-24
+        "https://c.saavncdn.com/795/Dai-Ke-Achra-Hindi-2024-20240222222336-500x500.jpg", // 14-Feb-24
+        "https://c.saavncdn.com/236/Astray-Unknown-2024-20240318173022-500x500.jpg", // 15-Mar-24 (FV Digital)
+        "https://c.saavncdn.com/824/Lost-In-Dream-Unknown-2024-20240318181726-500x500.jpg", // 18-Mar-24 (FV Digital)
+        "https://c.saavncdn.com/847/Perception-English-2024-20240408211630-500x500.jpg", // 10-Apr-24 (FV Digital)
+        "https://c.saavncdn.com/228/Ovimaner-Ovishap-Bengali-2024-20240429220615-500x500.jpg", // 30-Apr-24
+        "https://c.saavncdn.com/043/Melancholy-Bengali-2024-20240506182100-500x500.jpg", // 13-May-24
+        "https://c.saavncdn.com/899/Dard-Hindi-2024-20240514230957-500x500.jpg", // 15-May-24 (FV Digital)
+        "https://c.saavncdn.com/878/What-To-Do-Punjabi-2024-20240605211036-500x500.jpg", // 07-Jun-24
+        "https://c.saavncdn.com/788/Amare-Keu-Koilo-Na-Bengali-2024-20240611173922-500x500.jpg", // 13-Jun-24
+        "https://c.saavncdn.com/228/Debota-Kothay-Chilo-Bengali-2024-20240611173940-500x500.jpg", // 18-Jun-24
+        "https://c.saavncdn.com/569/Tumi-Chara-Amar-Kono-Nam-Nai-Bengali-2024-20240612203452-500x500.jpg", // 24-Jun-24
+
+        // S4B Recordz (Placed after May 2024 seamlessly)
+        "https://c.saavncdn.com/194/Burning-Unknown-2024-20240604212131-500x500.jpg",
+        "https://c.saavncdn.com/054/Bhuliye-Dibo-Unknown-2024-20240617181219-500x500.jpg",
+        "https://c.saavncdn.com/721/Surah-An-Naba-Arabic-2024-20240626001033-500x500.jpg",
+        "https://c.saavncdn.com/550/Surah-Ar-Rahman-Arabic-2024-20240627221247-500x500.jpg",
+        "https://c.saavncdn.com/216/Surah-As-Sajdah-Arabic-2024-20240627221252-500x500.jpg",
+        "https://c.saavncdn.com/363/Surah-Ya-sin-Arabic-2024-20240627221305-500x500.jpg",
+        "https://c.saavncdn.com/372/Amari-Hridoy-Keno-Unknown-2024-20240731170340-500x500.jpg",
+        "https://c.saavncdn.com/746/Amar-Nam-Tumi-Unknown-2024-20240730181254-500x500.jpg",
+        "https://c.saavncdn.com/354/Tomake-Khuje-Pelam-Unknown-2024-20240802001055-500x500.jpg",
+        "https://c.saavncdn.com/914/Awari-Unknown-2024-20240805211256-500x500.jpg",
+        "https://c.saavncdn.com/925/Boshonter-Phol-Unknown-2024-20240805211242-500x500.jpg",
+        "https://c.saavncdn.com/458/Hridspondhan-Unknown-2024-20240807231036-500x500.jpg",
+        "https://c.saavncdn.com/038/Jaaniya-Unknown-2024-20240812170822-500x500.jpg",
+        "https://c.saavncdn.com/385/Nishpap-Jibon-Unknown-2024-20240812211231-500x500.jpg",
+        "https://c.saavncdn.com/430/Panir-Moto-Unknown-2024-20240815001025-500x500.jpg",
+        "https://c.saavncdn.com/684/Ami-Tomari-Unknown-2024-20240815211520-500x500.jpg",
+        "https://c.saavncdn.com/437/Ektu-Beche-Dekho-Unknown-2024-20240819192135-500x500.jpg",
+        "https://c.saavncdn.com/492/Bondhu-Unknown-2024-20240820191636-500x500.jpg",
+        "https://c.saavncdn.com/982/Goblin-OST-Unknown-2024-20240822221402-500x500.jpg",
+        "https://c.saavncdn.com/711/Maula-Unknown-2024-20240822221350-500x500.jpg",
+        "https://c.saavncdn.com/986/Hashir-Karon-Unknown-2024-20240823192039-500x500.jpg",
+        "https://c.saavncdn.com/546/Manjha-Unknown-2024-20240826181559-500x500.jpg",
+        "https://c.saavncdn.com/330/Opekkha-Unknown-2024-20240829181321-500x500.jpg",
+        "https://c.saavncdn.com/421/Shuno-Unknown-2024-20240829201942-500x500.jpg",
+        "https://c.saavncdn.com/543/Shob-Kichu-Unknown-2024-20240829181317-500x500.jpg",
+        "https://c.saavncdn.com/273/Majha-Ladka-Bappa-Aala-Marathi-2024-20250718125235-500x500.jpg", // 07-Sep-24
+        "https://c.saavncdn.com/225/Parvaticha-Nandana-Marathi-2024-20250718125236-500x500.jpg", // 10-Sep-24
+        "https://c.saavncdn.com/914/Katari-Kadje-Vagi-Gujarati-2024-20241115221613-500x500.jpg", // 10-Nov-24
+        "https://c.saavncdn.com/342/Om-Gan-Ganpataye-Namo-Namah-Hindi-2024-20241113211427-500x500.jpg", // 12-Nov-24
+        "https://c.saavncdn.com/064/Sonal-Tu-Sarkar-Gujarati-2024-20241119210355-500x500.jpg", // 19-Nov-24
+        "https://c.saavncdn.com/057/Maru-Man-Mohi-Gayu-Gujarati-2024-20241119210736-500x500.jpg", // 19-Nov-24
+        "https://c.saavncdn.com/085/Sarak-Gail-Sadi-Rajaji-Bhojpuri-2024-20241210191453-500x500.jpg", // 09-Dec-24
+        "https://c.saavncdn.com/443/Vanrate-Vanma-Gujarati-2024-20241222145831-500x500.jpg", // 23-Dec-24
+        // Remaining 2024 S4B 2.0 tracks
+        "https://c.saavncdn.com/002/Amar-Nam-Tumi-2-0-Unknown-2024-20241031191351-500x500.jpg",
+        "https://c.saavncdn.com/476/Amari-Hridoy-Keno-2-0-Unknown-2024-20241031191353-500x500.jpg",
+        "https://c.saavncdn.com/946/Tomake-Khuje-Pelam-2-0-Unknown-2024-20241101181534-500x500.jpg",
+        "https://c.saavncdn.com/250/Awari-2-0-Bengali-2024-20241102020035-500x500.jpg",
+        "https://c.saavncdn.com/067/Boshonter-Phol-2-0-Bengali-2024-20241105181128-500x500.jpg",
+        "https://c.saavncdn.com/306/Hridspondhan-2-0-Bengali-2024-20241109001608-500x500.jpg",
+        "https://c.saavncdn.com/627/Jaaniya-2-0-Bengali-2024-20241108231336-500x500.jpg",
+        "https://c.saavncdn.com/438/Nishpap-Jibon-2-0-Bengali-2024-20241108231341-500x500.jpg",
+        "https://c.saavncdn.com/090/Tarar-Shohor-2-0-Bengali-2024-20241111231012-500x500.jpg",
+        "https://c.saavncdn.com/174/Panir-Moto-2-0-Bengali-2024-20241113220940-500x500.jpg",
+        "https://c.saavncdn.com/435/Saki-Saki-Bengali-2024-20241113210930-500x500.jpg",
+        "https://c.saavncdn.com/785/See-You-Again-Bengali-2024-20241113231157-500x500.jpg",
+        "https://c.saavncdn.com/782/Shatrong-Bengali-2024-20241121201641-500x500.jpg",
+        "https://c.saavncdn.com/777/Tomake-Chai-Bengali-2024-20241122180932-500x500.jpg",
+        "https://c.saavncdn.com/395/Chithi-Bengali-2024-20241125222245-500x500.jpg",
+        "https://c.saavncdn.com/332/Tumi-Esho-Bengali-2024-20241127181823-500x500.jpg",
+        "https://c.saavncdn.com/162/Vhablam-Avo-Ne-Bengali-2024-20241127181822-500x500.jpg",
+
+        // --- 2025 Releases ---
+        "https://c.saavncdn.com/123/Harmony-Of-Souls-Unknown-2025-20250107000806-500x500.jpg", // 07-Jan-25
+        "https://c.saavncdn.com/861/Sharad-Mein-Marad-Bhojpuri-2025-20250130190820-500x500.jpg", // 27-Jan-25
+        "https://c.saavncdn.com/410/Sound-Of-Arabic-Unknown-2025-20250131180840-500x500.jpg", // 31-Jan-25
+        "https://c.saavncdn.com/402/Sound-Of-Arabic-2-0-Unknown-2025-20250211202646-500x500.jpg", // 12-Feb-25
+        "https://i.audiomack.com/sanskar-balas/15757557-1.webp?width=1440", // 08-Mar-25
+        "https://c.saavncdn.com/526/Sarkari-Gujarati-2025-20250315002248-500x500.jpg", // 13-Mar-25
+        "https://c.saavncdn.com/631/Kutchi-Vaval-Tune-Gujarati-2025-20250315002738-500x500.jpg", // 15-Mar-25
+        "https://i.audiomack.com/sanskar-balas/15757557-1.webp?width=1440", // Sanskar Balas track
+        "https://c.saavncdn.com/602/Happy-Birthday-Punjabi-2025-20260307013753-500x500.jpg", // 29-Apr-25
+        "https://c.saavncdn.com/324/Mi-Radha-Tu-Maza-Mohan-Gavlan-Marathi-2025-20250718125235-500x500.jpg", // 18-Jan-25
+        "https://c.saavncdn.com/385/Halat-Punjabi-2025-20260310095133-500x500.jpg", // 05-Sep-25
+        "https://c.saavncdn.com/678/Sita-Ne-Toran-Unknown-2025-20251126174621-500x500.jpg", // 26-Nov-25
+
+        // --- 2026 Releases ---
+        "https://c.saavncdn.com/672/Mara-Re-Sam-Manojee-Unknown-2026-20260405065952-500x500.jpg", // 13-Mar-26
+        "https://c.saavncdn.com/997/Raam-Dhun-Gujarati-2026-20260612001409-500x500.jpg", // 25-May-26
+        "https://c.saavncdn.com/620/Kon-Halave-Limbadi-Gujarati-2026-20260915203801-500x500.jpg"  // 28-Aug-26
+    ];
+
+    const galleryContainer = document.getElementById("galleryContainer");
+
+    function createGalleryItems(list, type) {
+        return list.map(url => {
+            const div = document.createElement("div");
+            div.className = `gallery-item ${type} ${type !== 'album' ? 'hidden' : ''}`;
+            div.innerHTML = `<img src="${url}" alt="${type} release">`;
+            return div;
+        });
+    }
+
+    function renderGallery() {
+        const allItems = [
+            ...createGalleryItems(albums, 'album'),
+            ...createGalleryItems(singles, 'single'),
+            ...createGalleryItems(clients, 'client')
+        ];
+        allItems.forEach(item => galleryContainer.appendChild(item));
+    }
+
+    function updateImageCounters() {
+        document.getElementById("albumCount").innerText = albums.length;
+        document.getElementById("singleCount").innerText = singles.length;
+        document.getElementById("clientCount").innerText = clients.length;
+
+        const total = albums.length + singles.length + clients.length;
+        document.getElementById("totalImageCount").innerText = total;
+    }
+
+    function filterItems(type, event) {
+        const types = ['album', 'single', 'client'];
+        types.forEach(t => {
+            document.querySelectorAll('.' + t).forEach(el => {
+                el.classList.toggle('hidden', t !== type);
+            });
+        });
+
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        if (event) event.target.classList.add('active');
+    }
+
+    function toggleMenu() {
+        const navLinks = document.getElementById('navLinks');
+        navLinks.classList.toggle('active');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderGallery();
+        updateImageCounters();
+    });
+</script>
+
+</body>
+</html>

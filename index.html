@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/jpeg" href="https://c.saavncdn.com/labels/Aw_Musik_20230420112404_500x500.jpg">
+    <title>AW Musik | Private Record Label & Distribution Network</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="music-container">
+    
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-brand" style="display: flex; align-items: center; gap: 12px;">
+            <a href="index.html" class="nav-logo-link">
+                <img src="https://c.saavncdn.com/labels/Aw_Musik_20230420112404_500x500.jpg" alt="AW Musik Logo" class="nav-logo">
+            </a>
+            <span style="font-weight: 800; letter-spacing: 1px; font-size: 16px; color: #ffffff; text-transform: uppercase;">AW MUSIK</span>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Menu">☰</button>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html" class="active-link" style="border-color: #ffcc00; color: #ffcc00;">Home</a>
+            <a href="releases.html">Releases</a>
+            <a href="labels.html">Distributed Labels</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- 1. About Us Section -->
+    <div id="about" class="section">
+        <h2 class="section-header">About AW Musik</h2>
+        <div class="about-box">
+            Founded in 2018, <strong style="color: #ffffff;">AW Musik</strong> is an exclusive independent record label and parent music distribution network. Evolving beyond electronic and instrumental roots into Hip-Hop and multi-genre soundscapes, we power global metadata management, publishing, and supply-chain infrastructure for partnered sub-labels and diverse indie rosters spanning Pop, Folk, Hip-Hop, and Regional Indian music worldwide.
+        </div>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.15); max-width: 1200px; margin: 20px auto;">
+
+    <!-- 2. Catalogue Size Section -->
+    <div id="stats" class="section">
+        <h2 class="section-header">Catalogue Size</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">🎵</div>
+                <div class="stat-number">130</div>
+                <div class="stat-label">Tracks live under AW Musik</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💿</div>
+                <div class="stat-number">64</div>
+                <div class="stat-label">Releases live under AW Musik</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎧</div>
+                <div class="stat-number">350</div>
+                <div class="stat-label">Tracks delivered across many labels</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🌐</div>
+                <div class="stat-number">5B</div>
+                <div class="stat-label">Total digital streams achieved</div>
+            </div>
+        </div>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.15); max-width: 1200px; margin: 20px auto;">
+
+    <!-- 3. Recent Releases Sections -->
+    <div id="releases" class="section">
+        <h2 class="section-header">Recent Releases</h2>
+        
+        <!-- AW Musik Originals -->
+        <div class="sub-header" style="margin-top: 10px;">AW Musik Originals</div>
+        <div class="release-grid" id="awReleaseGrid">
+            <!-- Loaded via JS -->
+        </div>
+
+        <!-- Client & Sub-Label Releases -->
+        <div class="sub-header" style="margin-top: 35px;">Client & Sub-Label Releases</div>
+        <div class="release-grid" id="clientReleaseGrid">
+            <!-- Loaded via JS -->
+        </div>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.15); max-width: 1200px; margin: 20px auto;">
+
+    <!-- 4. Separate Rolling Marquees for Artists & Labels -->
+    <div id="roster" class="section">
+        <h2 class="section-header">Roster & Distribution Network</h2>
+        
+        <!-- Artists Rolling Marquee -->
+        <div class="sub-header" style="margin-top: 10px;">Featured Artists</div>
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <span class="roster-pill">Anup Wasave</span>
+                <span class="roster-pill">Mrfreasher</span>
+                <span class="roster-pill">Sujeet Kumar Sharma</span>
+                <span class="roster-pill">DJ Farman</span>
+                <span class="roster-pill">Karan Art DMT</span>
+                <span class="roster-pill">Sanskar Balas</span>
+                <span class="roster-pill">Shyam Khanderiya</span>
+                <span class="roster-pill">Ok Sinha</span>
+                <span class="roster-pill">Jasraj Gill</span>
+                <span class="roster-pill highlight">& Many More</span>
+            </div>
+            <div class="marquee-content" aria-hidden="true">
+                <span class="roster-pill">Anup Wasave</span>
+                <span class="roster-pill">Mrfreasher</span>
+                <span class="roster-pill">Sujeet Kumar Sharma</span>
+                <span class="roster-pill">DJ Farman</span>
+                <span class="roster-pill">Karan Art DMT</span>
+                <span class="roster-pill">Sanskar Balas</span>
+                <span class="roster-pill">Shyam Khanderiya</span>
+                <span class="roster-pill">Ok Sinha</span>
+                <span class="roster-pill">Jasraj Gill</span>
+                <span class="roster-pill highlight">& Many More</span>
+            </div>
+        </div>
+
+        <!-- Labels Rolling Marquee -->
+        <div class="sub-header" style="margin-top: 25px;">Sub-Labels & Client Networks</div>
+        <div class="marquee-container">
+            <div class="marquee-content reverse">
+                <span class="roster-pill">AW Musik</span>
+                <span class="roster-pill">nusstudio</span>
+                <span class="roster-pill">FV Digital</span>
+                <span class="roster-pill">Karan Art DMT</span>
+                <span class="roster-pill">StarClip Music</span>
+                <span class="roster-pill">S4B Recordz</span>
+                <span class="roster-pill">DFN Recordz</span>
+                <span class="roster-pill">Sangi Music</span>
+                <span class="roster-pill">Music Cottage</span>
+                <span class="roster-pill">Sanskar Music</span>
+                <a href="releases.html" class="roster-pill highlight" style="text-decoration: none;">& Many More</a></div>
+            <div class="marquee-content reverse" aria-hidden="true">
+                <span class="roster-pill">AW Musik</span>
+                <span class="roster-pill">nusstudio</span>
+                <span class="roster-pill">FV Digital</span>
+                <span class="roster-pill">Karan Art DMT</span>
+                <span class="roster-pill">StarClip Music</span>
+                <span class="roster-pill">S4B Recordz</span>
+                <span class="roster-pill">DFN Recordz</span>
+                <span class="roster-pill">Sangi Music</span>
+                <span class="roster-pill">Music Cottage</span>
+                <span class="roster-pill">Sanskar Music</span>
+                <a href="releases.html" class="roster-pill highlight" style="text-decoration: none;">& Many More</a></div>
+        </div>
+
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.15); max-width: 1200px; margin: 20px auto;">
+
+    <!-- 5. Contact Section -->
+    <div id="contact" class="section">
+        <h2 class="section-header">Contact & Inquiries</h2>
+        <div class="contact-box">
+            <p style="margin-bottom: 8px; opacity: 0.9;">For catalog inquiries, distribution partnerships, and licensing:</p>
+            <p style="font-weight: bold; color: #7dc4ff; font-size: 18px;">contact@awmusik.co.in</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="site-footer"></div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

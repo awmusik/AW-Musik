@@ -1,0 +1,439 @@
+:root {
+    --primary-color: #ffffff;
+    --secondary-color: rgba(255, 255, 255, 0.1);
+    --accent-color: #007bff;
+    --font-family: 'Inter', 'Arial', sans-serif;
+    --gradient-hover: linear-gradient(90deg, #ff7e5f 0%, #feb47b 50%, #86A8E7 100%); 
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+ 
+body {
+    font-family: var(--font-family);
+    color: var(--primary-color);
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 25%, #4a8dfa 50%, #7dc4ff 75%, #a8e4ff 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    overflow-x: hidden;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.music-container {
+    padding-top: 80px;
+}
+
+/* --- Navigation Bar CSS (Fixed Desktop & Mobile) --- */
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+.nav-brand {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: auto; /* Fixed: Desktop par flex space sahi distribute karega */
+}
+
+.nav-title {
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.nav-links {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: nowrap; /* Fixed: Links do lines me break nahi honge */
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.nav-links a:hover {
+    background-image: var(--gradient-hover);
+    border-color: transparent;
+    transform: translateY(-2px);
+}
+
+/* --- Mobile Responsive Navigation --- */
+@media (max-width: 768px) {
+    .nav-bar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px 20px;
+    }
+
+    .nav-brand {
+        width: 100%; /* Mobile par full width rahega toggle button align karne ke liye */
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 12px;
+        padding-bottom: 5px;
+        width: 100%;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        text-align: center;
+        padding: 10px;
+        font-size: 13px;
+        background: rgba(0, 0, 0, 0.4);
+        width: 100%;
+    }
+
+    .music-container {
+        padding-top: 85px;
+    }
+}
+
+/* --- Content Sections --- */
+.section {
+    padding: 30px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-header {
+    font-size: 24px;
+    margin-bottom: 15px;
+    border-left: 5px solid var(--accent-color);
+    padding-left: 12px;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.sub-header {
+    font-size: 16px;
+    color: #a8e4ff;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* --- About Box --- */
+.about-box {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* --- Catalogue Size Section --- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+.stat-card {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+    border-color: var(--accent-color);
+}
+
+.stat-icon {
+    font-size: 24px;
+    margin-bottom: 6px;
+    display: inline-block;
+}
+
+.stat-number {
+    font-size: 30px;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+}
+
+.stat-label {
+    font-size: 12px;
+    opacity: 0.85;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+/* --- Releases Grid --- */
+.release-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.release-card {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.release-cover {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+}
+
+.release-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 15px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.release-card:hover .release-info {
+    opacity: 1;
+}
+
+.release-title {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.release-artist {
+    font-size: 12px;
+    opacity: 0.75;
+    margin-bottom: 8px;
+}
+
+.release-label-badge {
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--accent-color);
+    color: #ffffff;
+    padding: 3px 8px;
+    border-radius: 5px;
+    width: max-content;
+    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.4);
+    letter-spacing: 0.3px;
+}
+
+/* --- Rolling Marquee Section --- */
+.marquee-container {
+    overflow: hidden;
+    user-select: none;
+    display: flex;
+    gap: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 12px 0;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.marquee-content {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-around;
+    min-width: 100%;
+    gap: 15px;
+    animation: scroll 30s linear infinite;
+}
+
+.marquee-content.reverse {
+    animation: scrollReverse 30s linear infinite;
+}
+
+.marquee-container:hover .marquee-content {
+    animation-play-state: paused;
+}
+
+@keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+}
+
+@keyframes scrollReverse {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+.roster-pill {
+    background: rgba(255, 255, 255, 0.12);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    white-space: nowrap;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-weight: 500;
+}
+
+.roster-pill.highlight {
+    background: var(--accent-color);
+    border-color: transparent;
+    font-weight: 600;
+}
+
+/* --- Contact Section --- */
+.contact-box {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* --- Footer --- */
+.footer {
+    padding: 25px 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+    margin-top: 30px;
+}
+
+.copyright {
+    font-size: 12px;
+    opacity: 0.6;
+    margin-top: 8px;
+}
+
+/* --- Mobile Responsive Navigation & Layout Adjustments --- */
+@media (max-width: 768px) {
+    .nav-bar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px 20px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-brand {
+        width: 100%;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 12px;
+        padding-bottom: 5px;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        text-align: center;
+        padding: 10px;
+        font-size: 13px;
+        background: rgba(0, 0, 0, 0.4);
+    }
+
+    .music-container {
+        padding-top: 85px;
+    }
+}
+/* --- Logo Styling --- */
+.nav-logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.nav-logo {
+    height: 35px; /* Size adjust karne ke liye height change kar sakte ho */
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.nav-logo:hover {
+    transform: scale(1.05);
+}
+
+/* Mobile par agar logo thoda chhota rakhna ho */
+@media (max-width: 768px) {
+    .nav-logo {
+        height: 30px;
+    }
+}
+
+@media (min-width: 601px) {
+    .release-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+}
