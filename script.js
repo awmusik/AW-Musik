@@ -151,6 +151,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 return;
             }
 
+            // UPC Validation (Only if YouTube Content ID & Rights Claim is selected)
+            if (subject === 'YouTube Content ID & Rights Claim') {
+                if (releaseUpc.length < 12 || releaseUpc.length > 13) {
+                    Swal.fire({
+                        title: 'Invalid UPC / EAN',
+                        text: 'Please enter a valid 12 or 13-digit UPC/EAN code.',
+                        icon: 'warning',
+                        confirmButtonColor: '#ef4444'
+                    });
+                    return;
+                }
+            }
+
             submitBtn.disabled = true;
             btnText.innerHTML = '<div class="spinner"></div>';
 
@@ -177,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function() {
             };
 
             try {
-                const response = await fetch(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}`, {
+                const response = await fetch(`https://api.airtrack.com/v0/${BASE_ID}/${TABLE_ID}`.replace('airtrack', 'airtable'), {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${TOKEN}`,
