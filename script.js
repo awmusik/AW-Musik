@@ -77,6 +77,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Render Releases on load
     renderReleases();
 });
+
 // Contact Form & Airtable Integration Logic
 document.addEventListener("DOMContentLoaded", function() {
     const subjectSelect = document.getElementById('subject');
@@ -84,6 +85,21 @@ document.addEventListener("DOMContentLoaded", function() {
     const contactForm = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
     const btnText = document.getElementById('btnText');
+    const phoneInput = document.getElementById('phone');
+    const upcInput = document.getElementById('releaseUpc');
+
+    // Restrict Phone and UPC to numbers only automatically
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+    }
+
+    if (upcInput) {
+        upcInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+    }
 
     if (subjectSelect && contactForm) {
         // Toggle Conditional UPC field
@@ -106,6 +122,18 @@ document.addEventListener("DOMContentLoaded", function() {
             const subject = document.getElementById('subject').value;
             const releaseUpc = document.getElementById('releaseUpc').value;
             const message = document.getElementById('message').value;
+
+            // Strict Email Validation Check
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                Swal.fire({
+                    title: 'Invalid Email',
+                    text: 'Please enter a valid email address with extension (e.g., name@gmail.com)',
+                    icon: 'warning',
+                    confirmButtonColor: '#ef4444'
+                });
+                return;
+            }
 
             submitBtn.disabled = true;
             btnText.innerHTML = '<div class="spinner"></div>';
