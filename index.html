@@ -202,10 +202,9 @@
                         </select>
                     </div>
 
-                    <!-- Conditional UPC Field (Visible only if YouTube is selected) -->
                     <div class="form-group upc-group" id="upcGroup">
-                        <label for="releaseUpc">Release UPC</label>
-                        <input type="text" id="releaseUpc" pattern="[0-9]*" inputmode="numeric" placeholder="Enter numbers only (UPC)...">
+                            <label for="releaseUpc">Release UPC / ISRC</label>
+                            <input type="text" id="releaseUpc" inputmode="numeric" placeholder="Enter numbers only..." oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                     </div>
 
                     <div class="form-group">
