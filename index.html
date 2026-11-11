@@ -6,6 +6,7 @@
 <link rel="icon" type="image/jpeg" href="https://c.saavncdn.com/labels/Aw_Musik_20230420112404_500x500.jpg">
     <title>AW Musik | Private Record Label & Distribution Network</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 <body>
 
@@ -154,10 +155,69 @@
 
     <!-- 5. Contact Section -->
     <div id="contact" class="section">
-        <h2 class="section-header">Contact & Inquiries</h2>
-        <div class="contact-box">
-            <p style="margin-bottom: 8px; opacity: 0.9;">For catalog inquiries, distribution partnerships, and licensing:</p>
-            <p style="font-weight: bold; color: #7dc4ff; font-size: 18px;">contact@awmusik.co.in</p>
+        <h2 class="section-header">Get in Touch</h2>
+        
+        <div class="contact-page-container">
+            <!-- Left Side Info -->
+            <div class="contact-info-side">
+                <div>
+                    <h2>CONTACT</h2>
+                    <p>Contact us if you are facing any problem accessing our tracks or you want to publish all your future ORIGINAL songs and albums through us or want to start a new journey with us.</p>
+                    
+                    <div class="info-list">
+                        <div class="info-item">📍 Guhagar, Maharashtra, India</div>
+                        <div class="info-item">✈️ <a href="https://t.me/awmusical" target="_blank" style="color: #7dc4ff; text-decoration: none;">awmusical</a></div>
+                        <div class="info-item">✉️ awmusik29@gmail.com</div>
+                        <div class="info-item">⏰ Mon-Fri : 12 pm - 8 pm<br>      Sat-Sun : Off</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side Form -->
+            <div class="contact-form-side">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" placeholder="Enter your full name..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" placeholder="Enter your phone number...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email address..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject / Category</label>
+                        <select id="subject" required>
+                            <option value="" disabled selected>Select category...</option>
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Music Distribution & Sub-Label">Music Distribution & Sub-Label</option>
+                            <option value="YouTube Content ID & Rights Claim">YouTube Content ID & Rights Claim</option>
+                            <option value="Royalty & Payments">Royalty & Payments</option>
+                        </select>
+                    </div>
+
+                    <!-- Conditional UPC Field (Visible only if YouTube is selected) -->
+                    <div class="form-group upc-group" id="upcGroup">
+                        <label for="releaseUpc">Release UPC / ISRC</label>
+                        <input type="text" id="releaseUpc" placeholder="Enter release UPC or ISRC code...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Write your message or query details..." required></textarea>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="submit-btn">
+                        <span id="btnText">Submit</span>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 
