@@ -88,16 +88,21 @@ document.addEventListener("DOMContentLoaded", function() {
     const phoneInput = document.getElementById('phone');
     const upcInput = document.getElementById('releaseUpc');
 
-    // Restrict Phone and UPC to numbers only automatically
+    // Restrict Phone to numbers only and max 10 digits
     if (phoneInput) {
         phoneInput.addEventListener('input', function() {
-            this.value = this.value.replace(/[^0-9]/g, '');
+            let val = this.value.replace(/[^0-9]/g, '');
+            if (val.length > 10) val = val.slice(0, 10);
+            this.value = val;
         });
     }
 
+    // Restrict UPC to numbers only and max 13 digits
     if (upcInput) {
         upcInput.addEventListener('input', function() {
-            this.value = this.value.replace(/[^0-9]/g, '');
+            let val = this.value.replace(/[^0-9]/g, '');
+            if (val.length > 13) val = val.slice(0, 13);
+            this.value = val;
         });
     }
 
@@ -122,6 +127,17 @@ document.addEventListener("DOMContentLoaded", function() {
             const subject = document.getElementById('subject').value;
             const releaseUpc = document.getElementById('releaseUpc').value;
             const message = document.getElementById('message').value;
+
+            // Phone length check
+            if (phone.length < 10) {
+                Swal.fire({
+                    title: 'Invalid Phone Number',
+                    text: 'Please enter a valid 10-digit phone number.',
+                    icon: 'warning',
+                    confirmButtonColor: '#ef4444'
+                });
+                return;
+            }
 
             // Strict Email Validation Check
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
