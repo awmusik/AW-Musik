@@ -8,10 +8,10 @@ const awReleases = [
 ];
 
 const clientReleases = [
+    { title: "Ganesh Paat", artist: "Sanskar Balas", label: "Sanskar.b Music", coverPath: "815/Ganesh-Paat-Unknown-2026-20261119190338-500x500.jpg" },
     { title: "Kon Halave Limbadi", artist: "Sanskar Balas", label: "Sanskar.b Music", coverPath: "620/Kon-Halave-Limbadi-Gujarati-2026-20260915203801-500x500.jpg" },
     { title: "Raam Dhun", artist: "Sanskar Balas", label: "Sanskar.b Music", coverPath: "997/Raam-Dhun-Gujarati-2026-20260612001409-500x500.jpg" },
-    { title: "Mera Re Sam Manojee", artist: "Sanskar Balas", label: "Sanskar.b Music", coverPath: "672/Mara-Re-Sam-Manojee-Unknown-2026-20260405065952-500x500.jpg" },
-    { title: "Halat", artist: "Jasraj Gill", label: "78 Recordss", coverPath: "385/Halat-Punjabi-2025-20260310095133-500x500.jpg" }
+    { title: "Mera Re Sam Manojee", artist: "Sanskar Balas", label: "Sanskar.b Music", coverPath: "672/Mara-Re-Sam-Manojee-Unknown-2026-20260405065952-500x500.jpg" }
 ];
 
 function renderReleases() {
